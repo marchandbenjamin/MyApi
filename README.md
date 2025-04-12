@@ -21,30 +21,41 @@ Avant de pouvoir lancer le projet, assure-toi d’avoir installé :
 1. **Clone le projet**
 
 ```bash
-git clone git@github.com:marchandbenjamin/MyApi.git
-cd MyApi
+  git clone git@github.com:marchandbenjamin/MyApi.git
+  cd MyApi
 ```
 
 2. **Compile et télécharge les dépendances**
 
 ```bash
-mvn clean install
+  mvn clean install
 ```
 
 3. **Lance l’application**
 
 ```bash
-mvn spring-boot:run
+  mvn spring-boot:run
 ```
 
 > Par défaut, l’API tourne sur [http://localhost:8080](http://localhost:8080)
 
 ---
 
-## 🧪 Lancer les tests
+## 📊 Endpoints Actuator
 
-```bash
-mvn test
+Spring Boot Actuator expose des endpoints pour surveiller et diagnostiquer l'application. Voici les endpoints disponibles dans cette application :
+
+### 1. **Health Check**
+
+- **URL** : `/actuator/health`
+- **Méthode** : `GET`
+- **Description** : Vérifie la santé de l'application (par exemple, la connexion à la base de données, le système de fichiers, etc.).
+- **Exemple de réponse** :
+
+```json
+{
+  "status": "UP"
+}
 ```
 
 ---
@@ -73,4 +84,3 @@ src/
 ## 📄 Licence
 
 Projet de démonstration — libre de réutilisation 🚀
-```
