@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  java-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-api
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    restart: unless-stopped
