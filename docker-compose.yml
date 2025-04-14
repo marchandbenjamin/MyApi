@@ -1,12 +1,48 @@
-version: '3.8'
-
 services:
-  java-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: my-api
-    ports:
-      - "8080:8080"
-      - "5005:5005"
-    restart: unless-stopped
+    traefik:
+        image: traefik:v2.11
+        container_name: traefik
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+        command:
+            - "--entrypoints.web.address=:80"
+            - "--entrypoints.websecure.address=:443"
+            - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+            - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+            - "--providers.docker=true"
+            - "--certificatesresolvers.le.acme.httpchallenge=true"
+            - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+            - "--certificatesresolvers.le.acme.email=${LETSENCRYPT_EMAIL}"
+            - "--certificatesresolvers.le.acme.storage=/letsencrypt/certificates.json"
+            - "--log.level=INFO"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+            - "ssl-storage:/letsencrypt"
+        networks:
+            - web
+
+    java-api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: my-api
+        ports:
+            - "8080"
+        restart: unless-stopped
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.spring.rule=Host(`${JAVA_API_DOMAIN}`)"
+            - "traefik.http.routers.spring.entrypoints=websecure"
+            - "traefik.http.routers.spring.tls.certresolver=le"
+            - "traefik.http.services.spring.loadbalancer.server.port=8080"
+        networks:
+            - web
+
+volumes:
+    ssl-storage:
+
+networks:
+    web:
+        driver: bridge
