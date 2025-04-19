@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/api/board-games")
 public class BoardGameController {
 
-    @Autowired
-    private IBoardGameGeekClient boardGameGeekClient;
+    private final IBoardGameGeekClient boardGameGeekClient;
 
     @Operation(
         summary = "Get a list of board game by name",

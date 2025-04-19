@@ -6,26 +6,24 @@ import com.example.myboardgames.infrastructure.mapper.BoardGameDtoMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class BoardGameGeekClient implements IBoardGameGeekClient {
 
     private static final String BOARD_GAME_TYPE = "boardgame";
     private static final String BOARD_GAME_GEEK_BASE_URL = "https://boardgamegeek.com/xmlapi2";
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    private final WebClient.Builder webClientBuilder;
+    private final BoardGameDtoMapper mapper;
 
-    private XmlMapper xmlMapper;
-
-    @Autowired
-    private BoardGameDtoMapper mapper;
     private WebClient webClient;
+    private XmlMapper xmlMapper;
 
     @PostConstruct
     public void init() {
