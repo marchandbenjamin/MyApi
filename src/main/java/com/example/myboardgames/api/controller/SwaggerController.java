@@ -1,4 +1,4 @@
-package com.example.my_api.swagger.controller;
+package com.example.myboardgames.api.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,7 @@ public class SwaggerController {
     public RedirectView rootRedirectToSwagger() {
         return new RedirectView("/api/swagger-ui.html");
     }
+
     @GetMapping("/api")
     public RedirectView apiRedirectToSwagger() {
         return new RedirectView("/api/swagger-ui.html");
@@ -22,7 +23,7 @@ public class SwaggerController {
     }
 
     @GetMapping("/api/swagger")
-    public RedirectView  apiSwaggerRedirectToSwaggerUi() {
+    public RedirectView apiSwaggerRedirectToSwaggerUi() {
         return new RedirectView("/api/swagger-ui.html");
     }
 }

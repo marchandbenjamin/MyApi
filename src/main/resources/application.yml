@@ -17,6 +17,8 @@ server:
 logging:
     level:
         root: INFO
+        org:
+            springdoc: DEBUG
         org.springframework.web: DEBUG
         org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration: DEBUG
         org.springframework.web.servlet.DispatcherServlet: DEBUG
@@ -24,6 +26,7 @@ logging:
 springdoc:
     swagger-ui:
         path: /api/swagger-ui.html
+        url: /api/v3/api-docs
     api-docs:
         path: /api/v3/api-docs
 
@@ -32,7 +35,7 @@ jpa:
         ddl-auto: update
     properties:
         hibernate:
-            default_schema: my-api
+            default_schema: my-board-games
 
 
 management:

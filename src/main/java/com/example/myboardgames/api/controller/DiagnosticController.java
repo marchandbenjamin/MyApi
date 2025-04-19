@@ -1,4 +1,4 @@
-package com.example.my_api.diagnostics.controller;
+package com.example.myboardgames.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/diagnostics")
 public class DiagnosticController {
 
     @Autowired
@@ -29,18 +29,18 @@ public class DiagnosticController {
     }
 
     @Operation(
-            summary = "Health check endpoint",
-            description = "Returns a simple status message to confirm that the application is running. "
-                    + "Useful for uptime monitoring, load balancers, and deployment checks."
+        summary = "Health check endpoint",
+        description = "Returns a simple status message to confirm that the application is running. "
+            + "Useful for uptime monitoring, load balancers, and deployment checks."
     )
     @ApiResponse(
-            responseCode = "200",
-            description = "Application is up and running",
-            content = @Content(mediaType = "text/plain", schema = @Schema(example = "UP")))
+        responseCode = "200",
+        description = "Application is up and running",
+        content = @Content(mediaType = "text/plain", schema = @Schema(example = "UP")))
     @ApiResponse(
-            responseCode = "503",
-            description = "Application is down or unavailable",
-            content = @Content(mediaType = "text/plain", schema = @Schema(example = "DOWN")))
+        responseCode = "503",
+        description = "Application is down or unavailable",
+        content = @Content(mediaType = "text/plain", schema = @Schema(example = "DOWN")))
     @GetMapping("/health/check")
     public ResponseEntity<String> healthCheck() {
 
