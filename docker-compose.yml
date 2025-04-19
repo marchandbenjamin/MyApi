@@ -1,61 +1,14 @@
 services:
-    traefik:
-        image: traefik:v2.11
-        container_name: traefik
-        restart: unless-stopped
-        ports:
-            - "80:80"
-            - "443:443"
-        command:
-            - "--entrypoints.web.address=:80"
-            - "--entrypoints.websecure.address=:443"
-            - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-            - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-            - "--providers.docker=true"
-            - "--certificatesresolvers.le.acme.httpchallenge=true"
-            - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
-            - "--certificatesresolvers.le.acme.email=${LETS_ENCRYPT_EMAIL}"
-            - "--certificatesresolvers.le.acme.storage=/letsencrypt/certificates.json"
-            - "--log.level=INFO"
-        volumes:
-            - "/var/run/docker.sock:/var/run/docker.sock:ro"
-            - "ssl-storage:/letsencrypt"
-        networks:
-            - web
-
-    java-api:
-        depends_on:
-            - postgres
-        build:
-            context: .
-            dockerfile: Dockerfile
-        container_name: my-api
-        ports:
-            - "61000:8080"
-        restart: unless-stopped
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.api.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/api`)"
-            - "traefik.http.routers.api.entrypoints=websecure"
-            - "traefik.http.routers.api.tls.certresolver=le"
-            - "traefik.http.services.api.loadbalancer.server.port=8080"
-        networks:
-            - web
-
     keycloak:
         depends_on:
             - postgres
-        image: quay.io/keycloak/keycloak:26.1.0
-        command: start
+        image: quay.io/keycloak/keycloak:24.0.1
         container_name: keycloak
+        command: start-dev
         environment:
+            KC_HTTP_PORT: 8081
             KEYCLOAK_ADMIN: admin
             KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-            KC_HTTP_ENABLED: "true"
-            KC_HTTP_RELATIVE_PATH: /identity
-            KC_HOSTNAME: ${DOMAIN_NAME}
-            KC_HOSTNAME_STRICT: "false"
-            KC_PROXY: edge
             KC_DB: postgres
             KC_DB_URL_HOST: postgres
             KC_DB_URL_DATABASE: ${POSTGRESQL_DB_NAME}
@@ -64,14 +17,6 @@ services:
             KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
         networks:
             - web
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.keycloak.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/identity`)"
-            - "traefik.http.routers.keycloak.entrypoints=websecure"
-            - "traefik.http.routers.keycloak.tls.certresolver=le"
-            - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
-            - "traefik.http.middlewares.forward-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
-            - "traefik.http.routers.keycloak.middlewares=forward-headers"
 
     postgres:
         image: postgres:17
@@ -84,6 +29,11 @@ services:
         volumes:
             - postgres-data:/var/lib/postgresql/data
             - ./sql/init:/docker-entrypoint-initdb.d
+        networks:
+            - web
+
+    redis:
+        image: redis:7
         networks:
             - web
 
