@@ -1,4 +1,4 @@
-package com.example.myboardgames.api.controller;
+package com.example.myboardgames.controller;
 
 import com.example.myboardgames.domain.dto.BoardGameDto;
 import com.example.myboardgames.infrastructure.client.IBoardGameGeekClient;

@@ -1,4 +1,4 @@
-package com.example.myboardgames.api.controller;
+package com.example.myboardgames.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
