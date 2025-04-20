@@ -1,4 +1,4 @@
-package com.example.myboardgames.infrastructure.dto;
+package com.roldaice.myboardgames.infrastructure.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;

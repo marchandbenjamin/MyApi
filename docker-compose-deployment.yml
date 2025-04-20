@@ -23,13 +23,13 @@ services:
         networks:
             - web
 
-    java-api:
+    my-board-games-api:
         depends_on:
             - postgres
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: my-api
+        container_name: my-board-games-api
         ports:
             - "61000:8080"
         restart: unless-stopped

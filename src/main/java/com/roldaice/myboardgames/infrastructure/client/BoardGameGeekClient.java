@@ -1,10 +1,10 @@
-package com.example.myboardgames.infrastructure.client;
+package com.roldaice.myboardgames.infrastructure.client;
 
-import com.example.myboardgames.domain.dto.BoardGameDto;
-import com.example.myboardgames.infrastructure.dto.BoardGamesXmlResponseDto;
-import com.example.myboardgames.infrastructure.mapper.BoardGameDtoMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.roldaice.myboardgames.domain.dto.BoardGameDto;
+import com.roldaice.myboardgames.infrastructure.dto.BoardGamesXmlResponseDto;
+import com.roldaice.myboardgames.infrastructure.mapper.BoardGameDtoMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

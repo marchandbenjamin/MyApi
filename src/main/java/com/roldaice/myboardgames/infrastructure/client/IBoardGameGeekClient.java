@@ -1,6 +1,6 @@
-package com.example.myboardgames.infrastructure.client;
+package com.roldaice.myboardgames.infrastructure.client;
 
-import com.example.myboardgames.domain.dto.BoardGameDto;
+import com.roldaice.myboardgames.domain.dto.BoardGameDto;
 import java.util.List;
 
 public interface IBoardGameGeekClient {

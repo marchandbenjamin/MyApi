@@ -1,4 +1,4 @@
-package com.example.myboardgames.domain.dto;
+package com.roldaice.myboardgames.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;

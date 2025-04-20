@@ -1,7 +1,7 @@
-package com.example.myboardgames.controller;
+package com.roldaice.myboardgames.controller;
 
-import com.example.myboardgames.domain.dto.BoardGameDto;
-import com.example.myboardgames.infrastructure.client.IBoardGameGeekClient;
+import com.roldaice.myboardgames.domain.dto.BoardGameDto;
+import com.roldaice.myboardgames.infrastructure.client.IBoardGameGeekClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;

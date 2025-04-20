@@ -1,4 +1,4 @@
-package com.example.myboardgames.config;
+package com.roldaice.myboardgames.config;
 
 import org.mockito.Mockito;
 import reactor.core.publisher.Mono;

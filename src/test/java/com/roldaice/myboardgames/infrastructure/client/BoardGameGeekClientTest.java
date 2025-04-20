@@ -1,7 +1,7 @@
-package com.example.myboardgames.infrastructure.client;
+package com.roldaice.myboardgames.infrastructure.client;
 
-import com.example.myboardgames.config.MockBggWebClientConfig;
-import com.example.myboardgames.domain.dto.BoardGameDto;
+import com.roldaice.myboardgames.config.MockBggWebClientConfig;
+import com.roldaice.myboardgames.domain.dto.BoardGameDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

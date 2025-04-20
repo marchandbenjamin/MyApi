@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker compose debug" type="Remote">
-    <module name="my-api" />
+    <module name="my-board-games-api" />
     <option name="USE_SOCKET_TRANSPORT" value="true" />
     <option name="SERVER_MODE" value="false" />
     <option name="SHMEM_ADDRESS" />
